@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Catálogo de Inmuebles</h2>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let inmueble of inmuebles">
+      <div class="card h-100 shadow-sm">
+        <img [src]="inmueble.imagen" class="card-img-top" alt="inmueble">
+        <div class="card-body">
+          <h5 class="card-title">{{ inmueble.titulo }}</h5>
+          <p class="card-text">{{ inmueble.descripcion }}</p>
+          <p><strong>Precio:</strong> {{ inmueble.precio | currency:'USD' }}</p>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-primary btn-sm">Ver detalle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
