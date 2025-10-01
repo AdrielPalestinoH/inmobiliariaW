@@ -9,19 +9,36 @@ import { Productos } from './pages/productos/productos';
 import { Pagos } from './pages/pagos/pagos';
 import { Usuarios } from './pages/usuarios/usuarios';
 import { Creditos } from './pages/creditos/creditos';
+import { AltaInmueble } from './pages/alta-inmueble/alta-inmueble';
+
+
+import { Landing } from './pages/landing/landing';
+import { Login } from './pages/login/login';
+import { Register } from './pages/register/register';
+
+import { Propiedades } from './pages/propiedades/propiedades';
+
+
+
 
 export const routes: Routes = [
+  { path: '', component: Landing },
+  { path: 'login', component: Login },
+  { path: 'register', component: Register },
+  { path: 'propiedades', component: Propiedades },
+
   {
     path: '',
     component: MainLayout,
     children: [
-      { path: '', component: Catalogo }, // página inicial
-      { path: 'dashboard', component: Dashboard},
+      { path: 'dashboard', component: Dashboard },
       { path: 'clientes', component: Clientes },
       { path: 'productos', component: Productos },
       { path: 'pagos', component: Pagos },
       { path: 'usuarios', component: Usuarios },
-      { path: 'creditos', component: Creditos }
+      { path: 'creditos', component: Creditos },
+      { path: 'catalogo', component: Catalogo },
+      { path: 'alta-inmueble', component: AltaInmueble }
     ]
   }
 ];

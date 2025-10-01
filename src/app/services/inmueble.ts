@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 
 export interface Inmueble {
   id: number;
-  titulo: string;      // si tu entidad tiene "descripcion", cámbialo aquí
-  descripcion: string;
   precio: number;
-  imagen?: string;     // campo extra opcional para mostrar fotos
+  descripcion: string;
+  fechaAlta: string;
+  estadoDescripcion: string;
+  tipoDescripcion: string;
 }
 
 @Injectable({
@@ -18,7 +19,13 @@ export class InmuebleService {
 
   constructor(private http: HttpClient) {}
 
-  getInmuebles(): Observable<Inmueble[]> {
+  listarInmuebles(): Observable<Inmueble[]> {
     return this.http.get<Inmueble[]>(this.apiUrl);
+  }
+
+  crearInmueble(inmueble: Partial<Inmueble>, estadoId: number, tipoId: number): Observable<Inmueble> {
+    return this.http.post<Inmueble>(
+      `${this.apiUrl}?estadoId=${estadoId}&tipoId=${tipoId}`, inmueble
+    );
   }
 }

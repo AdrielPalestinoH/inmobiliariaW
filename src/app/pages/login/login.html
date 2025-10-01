@@ -1,0 +1,40 @@
+<div class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <a class="navbar-brand" routerLink="/">Tu Casa</a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" routerLink="/">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/catalogo">Propiedades</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/empresa">La empresa</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/exclusividad">Exclusividad</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/tienda">Tienda</a></li>
+    </ul>
+  </nav>
+
+  <!-- Login box -->
+  <div class="d-flex flex-grow-1 align-items-center justify-content-center">
+    <div class="card shadow p-4" style="width: 400px; border-radius: 12px;">
+      <h3 class="text-center mb-4">Iniciar sesión</h3>
+      <form>
+        <div class="mb-3">
+          <input type="email" class="form-control" placeholder="Email address">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <div class="mb-3 text-end">
+          <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+      </form>
+      <div class="text-center mt-3">
+        <a routerLink="/register">Crear cuenta</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center p-3 mt-auto">
+    <small>© 2025 Tu Casa - Todos los derechos reservados</small>
+  </footer>
+</div>
