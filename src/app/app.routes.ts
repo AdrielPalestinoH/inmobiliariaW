@@ -11,25 +11,31 @@ import { Usuarios } from './pages/usuarios/usuarios';
 import { Creditos } from './pages/creditos/creditos';
 import { AltaInmueble } from './pages/alta-inmueble/alta-inmueble';
 
-
 import { Landing } from './pages/landing/landing';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
-
 import { Propiedades } from './pages/propiedades/propiedades';
+import { DetallePropiedad } from './pages/detalle-propiedad/detalle-propiedad';
+import { MisPagos } from './pages/mispagos/mispagos';
 
-
-
+import { AdminGuard } from './core/guards/admin';
+import { ClienteGuard } from './core/guards/cliente';
 
 export const routes: Routes = [
   { path: '', component: Landing },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
   { path: 'propiedades', component: Propiedades },
+{ path: 'propiedad/:id', component: DetallePropiedad },
 
+  // 🔒 Cliente (tipo 2)
+  { path: 'mispagos', component: MisPagos, canActivate: [ClienteGuard] },
+
+  // 🔒 Panel de administrador (tipo 1)
   {
     path: '',
     component: MainLayout,
+    canActivate: [AdminGuard],
     children: [
       { path: 'dashboard', component: Dashboard },
       { path: 'clientes', component: Clientes },
@@ -38,9 +44,9 @@ export const routes: Routes = [
       { path: 'usuarios', component: Usuarios },
       { path: 'creditos', component: Creditos },
       { path: 'catalogo', component: Catalogo },
-      { path: 'alta-inmueble', component: AltaInmueble }
+      { path: 'alta-inmueble', component: AltaInmueble },
     ]
-  }
+  },
 ];
 
 @NgModule({

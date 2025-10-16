@@ -48,8 +48,7 @@ export class AltaInmueble implements OnInit {
   guardar() {
     this.inmuebleService.crearInmueble(
       { descripcion: this.inmueble.descripcion, precio: this.inmueble.precio },
-      this.inmueble.estadoId,
-      this.inmueble.tipoId
+   
     ).subscribe({
       next: () => alert('Inmueble creado con éxito'),
       error: (err) => console.error('Error al crear inmueble', err)

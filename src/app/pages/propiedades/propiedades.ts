@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor,CurrencyPipe  } from '@angular/common';
 import { InmuebleService, Inmueble } from '../../services/inmueble';
+import { RouterLink, RouterLinkActive } from '@angular/router'; // 👈 importa esto
 
 @Component({
   selector: 'app-propiedades',
   standalone: true,
-  imports: [CommonModule, NgFor],
+    imports: [CommonModule, NgFor, CurrencyPipe, RouterLink, RouterLinkActive], // 👈 agrégalo aquí
+
   templateUrl: './propiedades.html',
   styleUrls: ['./propiedades.scss']
 })

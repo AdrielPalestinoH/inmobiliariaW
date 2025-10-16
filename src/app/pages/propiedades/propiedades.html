@@ -4,10 +4,8 @@
     <a class="navbar-brand" routerLink="/">Tu Casa</a>
     <ul class="navbar-nav ms-auto">
       <li class="nav-item"><a class="nav-link" routerLink="/">Inicio</a></li>
-      <li class="nav-item"><a class="nav-link active" routerLink="/propiedades">Propiedades</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/empresa">La empresa</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/exclusividad">Exclusividad</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/tienda">Tienda</a></li>
+      <li class="nav-item"><a class="nav-link active" routerLink="/propiedades">Propiedades</a></li> 
+      <li class="nav-item"><a class="nav-link" routerLink="/login">Iniciar</a></li>
     </ul>
   </nav>
 
@@ -35,7 +33,9 @@
               <p><strong>{{ inmueble.precio | currency:'USD' }}</strong></p>
             </div>
             <div class="card-footer text-end">
-              <button class="btn btn-outline-primary btn-sm">Ver detalle</button>
+             <button class="btn btn-outline-primary btn-sm" [routerLink]="['/propiedad', inmueble.id]">
+              Ver detalle
+            </button>
             </div>
           </div>
         </div>
@@ -44,18 +44,18 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-dark text-white text-center p-3 mt-auto">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">Address<br><small>Calle Miguel Ángel Herrera...</small></div>
-        <div class="col-md-4">Contacts<br><small>+52 624 180 4639</small></div>
-        <div class="col-md-4">
-          Subscribe to our newsletter
-          <input type="email" class="form-control mt-2" placeholder="Your email">
-        </div>
+<footer class="footer text-white text-center p-3 mt-auto">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">Address<br><small>Calle Miguel Ángel Herrera...</small></div>
+      <div class="col-md-4">Contacts<br><small>+52 624 180 4639</small></div>
+      <div class="col-md-4">
+        Subscribe to our newsletter
+        <input type="email" class="form-control mt-2" placeholder="Your email">
       </div>
-      <hr class="bg-light">
-      <small>© 2025 Tu Casa</small>
     </div>
-  </footer>
+    <hr class="bg-light">
+    <small>© 2025 Tu Casa</small>
+  </div>
+</footer>
 </div>
