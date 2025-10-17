@@ -27,9 +27,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_ROCK_0B41DAC0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"
-          output_location: "dist/inmo-app"
-          skip_app_build: true  # 👈 evita que Azure intente hacer el build
+          app_location: "dist/inmo-app"   # 👈 aquí está el cambio importante
+          output_location: ""              # 👈 dejamos vacío
+          skip_app_build: true
+
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -42,3 +43,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_ROCK_0B41DAC0F }}
           action: "close"
+
