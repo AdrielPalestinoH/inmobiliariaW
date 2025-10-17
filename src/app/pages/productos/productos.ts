@@ -39,12 +39,12 @@ export class Productos implements OnInit {
   }
 
   cargarCatalogos() {
-    this.http.get<any[]>('http://localhost:8080/api/tipos-inmueble').subscribe({
+    this.http.get<any[]>('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/tipos-inmueble').subscribe({
       next: data => (this.tipos = data),
       error: err => console.error('Error al cargar tipos', err)
     });
 
-    this.http.get<any[]>('http://localhost:8080/api/estados-inmueble').subscribe({
+    this.http.get<any[]>('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/estados-inmueble').subscribe({
       next: data => (this.estados = data),
       error: err => console.error('Error al cargar estados', err)
     });

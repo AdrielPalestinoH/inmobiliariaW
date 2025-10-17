@@ -39,7 +39,7 @@ export class Pagos implements OnInit {
   }
 
   cargarMetodosPago() {
-    this.http.get<any[]>('http://localhost:8080/api/pagos/metodos').subscribe({
+    this.http.get<any[]>('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/pagos/metodos').subscribe({
       next: (data) => (this.metodos = data),
       error: (err) => console.error('Error al cargar métodos de pago', err)
     });
@@ -48,7 +48,7 @@ export class Pagos implements OnInit {
   verPagos(credito: any) {
     this.creditoSeleccionado = credito;
     this.clienteNombre = credito.usuarioNombre;
-    this.http.get<any[]>(`http://localhost:8080/api/pagos/detalle/${credito.id}`).subscribe({
+    this.http.get<any[]>(`https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/pagos/detalle/${credito.id}`).subscribe({
       next: (data) => (this.pagos = data),
       error: (err) => console.error('Error al cargar pagos', err)
     });
@@ -58,7 +58,7 @@ verDetalles(c: any) {
   this.creditoSeleccionado = c;
   this.mostrarDetalles = true;
 
-  this.http.get<any[]>(`http://localhost:8080/api/pagos/${c.id}`).subscribe({
+  this.http.get<any[]>(`https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/pagos/${c.id}`).subscribe({
     next: (data) => (this.detalles = data),
     error: (err) => console.error('Error al cargar pagos', err)
   });

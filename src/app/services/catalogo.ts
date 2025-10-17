@@ -16,7 +16,7 @@ export interface TipoInmueble {
   providedIn: 'root'
 })
 export class Catalogo {
-  private apiUrl = 'http://localhost:8080/api/catalogo';
+  private apiUrl = 'https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/catalogo';
 
   constructor(private http: HttpClient) {}
 

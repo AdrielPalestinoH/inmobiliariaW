@@ -28,7 +28,7 @@ export class Register {
       return;
     }
 
-    this.http.post('http://localhost:8080/api/usuarios', this.usuario).subscribe({
+    this.http.post('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/usuarios', this.usuario).subscribe({
       next: (data) => {
         alert('✅ Registro exitoso, ya puedes iniciar sesión.');
         this.router.navigate(['/login']);

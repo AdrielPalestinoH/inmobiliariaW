@@ -44,11 +44,11 @@ export class Creditos implements OnInit {
   }
 
   cargarCatalogos() {
-    this.http.get<any[]>('http://localhost:8080/api/usuarios').subscribe({
+    this.http.get<any[]>('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/usuarios').subscribe({
       next: (data) => (this.clientes = data),
       error: (err) => console.error('Error al cargar usuarios', err)
     });
-    this.http.get<any[]>('http://localhost:8080/api/inmuebles').subscribe({
+    this.http.get<any[]>('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/inmuebles').subscribe({
       next: (data) => (this.inmuebles = data),
       error: (err) => console.error('Error al cargar inmuebles', err)
     });
@@ -91,7 +91,7 @@ reestructurar() {
     return;
   }
 
-  const url = `http://localhost:8080/api/creditos/${this.nuevo.id}/reestructurar?nuevoTotalPagos=${this.nuevo.totalPagos}&frecuencia=${this.nuevo.frecuencia}`;
+  const url = `https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/creditos/${this.nuevo.id}/reestructurar?nuevoTotalPagos=${this.nuevo.totalPagos}&frecuencia=${this.nuevo.frecuencia}`;
 
   console.log('📤 Enviando reestructuración a:', url);
 

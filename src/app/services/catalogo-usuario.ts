@@ -9,7 +9,7 @@ export interface TipoUsuario {
 
 @Injectable({ providedIn: 'root' })
 export class CatalogoUsuario {
-  private apiUrl = 'http://localhost:8080/api/catalogo/tipos-usuario';
+  private apiUrl = 'https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/catalogo/tipos-usuario';
 
   constructor(private http: HttpClient) {}
 

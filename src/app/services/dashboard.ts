@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
-  private baseUrl = 'http://localhost:8080/api/dashboard';
+  private baseUrl = 'https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/dashboard';
 
   constructor(private http: HttpClient) {}
 

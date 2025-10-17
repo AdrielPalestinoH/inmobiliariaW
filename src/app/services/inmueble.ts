@@ -17,7 +17,7 @@ export interface Inmueble {
 
 @Injectable({ providedIn: 'root' })
 export class InmuebleService {
-  private apiUrl = 'http://localhost:8080/api/inmuebles';
+  private apiUrl = 'https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/inmuebles';
 
   constructor(private http: HttpClient) {}
 
@@ -34,10 +34,10 @@ export class InmuebleService {
   }
 
   obtenerInmueble(id: number) {
-    return this.http.get<Inmueble>(`http://localhost:8080/api/inmuebles/${id}`);
+    return this.http.get<Inmueble>(`https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/inmuebles/${id}`);
   }
 
   enviarContacto(inmuebleId: number, data: any) {
-    return this.http.post(`http://localhost:8080/api/inmuebles/${inmuebleId}/contacto`, data);
+    return this.http.post(`https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/inmuebles/${inmuebleId}/contacto`, data);
   }
 }

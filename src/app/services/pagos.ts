@@ -12,12 +12,12 @@ export interface Pago {
 
 @Injectable({ providedIn: 'root' })
 export class PagoService {
-  private apiUrl = 'http://localhost:8080/api/pagos';
+  private apiUrl = 'https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/pagos';
 
   constructor(private http: HttpClient) {}
 
   listarCreditos(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/api/creditos');
+    return this.http.get<any[]>('https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/creditos');
   }
 
   listarDetalles(creditoId: number): Observable<any[]> {

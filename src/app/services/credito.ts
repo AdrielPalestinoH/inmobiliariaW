@@ -19,7 +19,7 @@ export interface Credito {
 
 @Injectable({ providedIn: 'root' })
 export class CreditoService {
-  private apiUrl = 'http://localhost:8080/api/creditos';
+  private apiUrl = 'https://inmoapi-adagc9dgfjgnfuar.westus-01.azurewebsites.net/api/creditos';
 
   constructor(private http: HttpClient) {}
 
