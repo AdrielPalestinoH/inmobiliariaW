@@ -1,37 +1,98 @@
-name: Azure Static Web Apps CI/CD
+name: Angular CI/CD - Multi-Environment SWA
 
 on:
   push:
+    # 🔑 ACTUALIZACIÓN: Dispara en las 3 ramas para despliegue
     branches:
-      - master
+      - main
+      - qa
+      - development
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
+    # Las PRs a 'main' y 'qa' crearán entornos temporales de revisión
     branches:
-      - master
+      - main
+      - qa
 
 jobs:
-  build_and_deploy_job:
+  # ----------------------------------------------------
+  # 1. JOB DE COMPILACIÓN DE ANGULAR (CI)
+  # Este job prepara la app y sube los archivos compilados.
+  # ----------------------------------------------------
+  build_app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Asegúrate de usar la versión correcta de Node
+
+      - name: Install Dependencies and Build Angular
+        run: |
+          npm install
+          npm run build -- --output-path=dist/browser # Ajusta el comando si es necesario
+                                                      # El path debe coincidir con el 'app_location' de abajo
+
+      - name: Upload Angular Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-dist
+          path: dist/browser  # Sube la carpeta de salida
+
+  # ----------------------------------------------------
+  # 2. JOB DE DESPLIEGUE (CD)
+  # Este job se ejecuta después de la compilación y despliega el artefacto.
+  # ----------------------------------------------------
+  deploy_job:
+    needs: build_app # Depende de que la compilación haya sido exitosa
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Deploy to SWA Environment
+    
+    # 🔑 ACTUALIZACIÓN: Define el entorno lógico para aprobaciones (QA y Production)
+    # Las PRs se despliegan automáticamente a entornos temporales, 
+    # pero los PUSH a las ramas fijas deben tener aprobaciones.
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'Production-Front' || github.ref == 'refs/heads/qa' && 'QA-Front' || 'Development-Front' }}
+      
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
           lfs: false
 
-      - name: Deploy pre-built Angular app
+      - name: Download Compiled Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: angular-dist
+          path: .
+          
+      - name: Deploy to Azure Static Web App
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_ROCK_0B41DAC0F }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          # El repo_token NO es necesario si ya usas el token del SWA
           action: "upload"
-          app_location: "dist/inmo-app/browser"   # 👈 aquí está el cambio importante
-          output_location: ""              # 👈 dejamos vacío
+          
+          # 🔑 ACTUALIZACIÓN: Lógica de Despliegue Multi-Entorno
+          # Los SWA usan "deployment_environment" para desplegar a entornos nombrados.
+          # Si la rama NO es 'main', despliega a un entorno con el nombre de la rama.
+          # Si la rama es 'main', despliega al entorno de Producción.
+          deployment_environment: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/qa' && 'staging' || 'development' }}
+          
+          # La ubicación de la aplicación es donde el 'download-artifact' puso los archivos
+          app_location: "." 
+          output_location: "" 
+          api_location: ""
           skip_app_build: true
 
-
+  # ----------------------------------------------------
+  # 3. JOB PARA CERRAR LA PR (Mismo que el original)
+  # Este job es nativo de SWA y no necesita cambios.
+  # ----------------------------------------------------
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
@@ -43,5 +104,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_ROCK_0B41DAC0F }}
           action: "close"
-
-
